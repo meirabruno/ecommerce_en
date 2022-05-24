@@ -1,0 +1,77 @@
+require:
+  - rubocop-performance
+  - rubocop-rails
+
+AllCops:
+  NewCops: enable
+  TargetRubyVersion: 3.1
+  TargetRailsVersion: 7.0
+  SuggestExtensions: false
+
+Metrics/AbcSize:
+  Max: 50
+
+Metrics/BlockLength:
+  Max: 80
+
+Layout/EmptyLines:
+  Exclude:
+    - 'db/**/**'
+
+Layout/LineLength:
+  Max: 120
+  Exclude:
+    - 'config/**/**'
+
+Metrics/ClassLength:
+  Max: 150
+
+Metrics/MethodLength:
+  Max: 30
+
+Metrics/ModuleLength:
+  Max: 50
+  Exclude:
+    - 'spec/**/**'
+
+Style/Documentation:
+  Enabled: false
+
+Style/DoubleNegation:
+  Enabled: false
+
+Style/FrozenStringLiteralComment:
+  Exclude:
+    - 'db/**/**'
+
+Style/StringLiterals:
+  Exclude:
+    - 'db/**/**'
+
+Style/ClassAndModuleChildren:
+  EnforcedStyle: compact
+  Exclude:
+    - 'config/application.rb'
+
+Rails:
+  Enabled: true
+
+Rails/FilePath:
+  EnforcedStyle: slashes
+
+Performance/RedundantMerge:
+  Enabled: false
+
+Style/RescueModifier:
+  Exclude:
+    - 'app/**/*'
+
+Style/RescueStandardError:
+  Enabled: false
+
+Rails/ActiveRecordAliases:
+  Exclude:
+    - 'lib/tasks/**'
+
+Rails/UnknownEnv:
+  Enabled: false
