@@ -9,4 +9,8 @@ RSpec.describe Category, type: :model do
     it { should have_many(:categorizations) }
     it { should have_many(:products) }
   end
+
+  describe 'validations' do
+    it { should validate_presence_of(:name) }
+  end
 end
