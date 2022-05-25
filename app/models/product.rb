@@ -5,6 +5,6 @@ class Product < ApplicationRecord
   has_many :categories, through: :categorizations
   STATUS = %w[draft active].freeze
 
-  validates_presence_of :title, :description, :price
-  validates :status, presence: true, inclusion: { in: STATUS }
+  validates :title, :description, :price, :status, presence: true
+  validates :status, inclusion: { in: STATUS }
 end

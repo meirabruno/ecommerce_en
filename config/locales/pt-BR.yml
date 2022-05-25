@@ -1,4 +1,13 @@
 pt-BR:
+  views:
+    products: 'Produtos'
+    new_product: 'Adicionar Produto'
+    all: 'Todos'
+    active: 'Ativo'
+    draft: 'Rascunho'
+    product: 'Produto'
+    status: 'Status'
+    category: 'Categorias'
   products:
     flash:
       actions:

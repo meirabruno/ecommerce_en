@@ -1,0 +1,54 @@
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+  <h2><%= I18n.t('views.products') %></h2>
+  <div class="btn-toolbar mb-2 mb-md-0">
+    <%= link_to I18n.t('views.new_product'), new_product_path, class: 'btn btn-primary' %>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-header">
+    <ul class="nav">
+      <li class="nav-item">
+        <%= link_to I18n.t('views.all'), products_path, class: 'nav-link active' %>
+      </li>
+      <li class="nav-item">
+        <%= link_to I18n.t('views.active'), products_path, class: 'nav-link' %>
+      </li>
+      <li class="nav-item">
+        <%= link_to I18n.t('views.draft'), products_path, class: 'nav-link' %>
+      </li>
+    </ul>
+  </div>
+  <div class="card-body">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>
+          </th>
+          <th>
+          </th>
+          <th>
+            <%= I18n.t('views.product') %>
+          </th>
+          <th>
+            <%= I18n.t('views.status') %>
+          </th>
+          <th>
+            <%= I18n.t('views.category') %>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @products.each do |product| %>
+          <tr>
+            <td></td>
+            <td></td>
+            <td><%= product.title %></td>
+            <td><%= product.status %></td>
+            <td><%= product.categories.each { |category| category.name } %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

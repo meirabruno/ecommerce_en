@@ -5,7 +5,7 @@ FactoryBot.define do
     title { Faker::Book.title }
     description { "<h1>#{Faker::Lorem.paragraph}</h1>" }
     status { 'draft' }
-    tags { ['livro', 'literatura', 'cultura'] }
+    tags { %w[livro literatura cultura] }
     price { 3_000 }
     comparation_price { 2_490 }
   end
