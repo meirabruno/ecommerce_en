@@ -1,0 +1,7 @@
+pt-BR:
+  products:
+    flash:
+      actions:
+        create:
+          notice: 'Produto criado com sucesso'
+          danger: 'Não foi possível criar o produto, tente novamente mais tarde'
