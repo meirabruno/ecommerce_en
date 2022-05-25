@@ -8,6 +8,6 @@ describe 'Products' do
     expect(page).to have_content('Produtos')
     expect(page).to have_content(product.title)
     expect(page).to have_content(product.status)
-    expect(page).to have_content(product.categories.first)
+    expect(page).to have_content(product.category.name)
   end
 end

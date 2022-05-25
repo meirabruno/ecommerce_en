@@ -6,8 +6,7 @@ RSpec.describe Product, type: :model do
   subject { build(:product) }
 
   describe 'associations' do
-    it { should have_many(:categorizations) }
-    it { should have_many(:categories) }
+    it { should belong_to(:category) }
   end
 
   describe 'validations' do

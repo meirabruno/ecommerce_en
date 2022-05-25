@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 class Product < ApplicationRecord
-  has_many :categorizations, dependent: :destroy
-  has_many :categories, through: :categorizations
+  belongs_to :category
+
   STATUS = %w[draft active].freeze
 
   validates :title, :description, :price, :status, presence: true
