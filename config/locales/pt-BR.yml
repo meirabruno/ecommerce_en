@@ -8,9 +8,32 @@ pt-BR:
     product: 'Produto'
     status: 'Status'
     category: 'Categorias'
+    new_category: 'Adicionar Categoria'
+    return: 'Voltar'
+    product_organization: 'Organização de Produtos'
+    first_create_categories_in: 'Primeiro crie suas categorias em:'
+    tags_help: 'Para adicionar mais de uma tag separe elas por vírgula. Ex.: Ficção Científica, Cyberpunk'
+    discard: 'Descartar'
+    save: 'Salvar'
+  attributes:
+    product:
+      title: 'Título'
+      description: 'Descrição'
+      status: 'Status do Produto'
+      category: 'Categoria'
+      tags: 'Tags'
+      images: 'Mídias'
+      price: 'Preço'
+      comparation_price: 'Comparação de Preços'
   products:
     flash:
       actions:
         create:
           notice: 'Produto criado com sucesso'
-          danger: 'Não foi possível criar o produto, tente novamente mais tarde'
+          danger:
+            title: 'Título é obrigatório'
+            description: 'Descrição é obrigatória'
+            status: 'Status do Produto é obrigatório'
+            price: 'Preço é obrigatório'
+            category: 'Categoria é obrigatória'
+            comparation_price: 'Preço de comparação deve ser menor que Preço'

@@ -1,0 +1,84 @@
+<div class="container">
+  <div class="align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <div class="row">
+      <div class="col-md-1 col-3">
+        <div class="btn-toolbar mb-2 mb-md-0">
+          <%= link_to I18n.t('views.return'), products_path, class: 'btn btn-outline-dark' %>
+        </div>
+      </div>
+      <div class="col-md-11 col-9">
+        <h2><%= I18n.t('views.new_product') %></h2>
+      </div>
+    </div>
+  </div>
+  <%= form_with model: @product do |f| %>
+    <div class="row">
+      <div class="col-md-8">
+        <div class="card">
+          <div class="card-body">
+            <div class="mb-3">
+              <%= f.label :title, I18n.t('attributes.product.title'), class: 'form-label' %>
+              <%= f.text_field :title, class: 'form-control', required: true %>
+            </div>
+            <div class="mb-3">
+              <%= f.label :content, I18n.t('attributes.product.description'), class: 'form-label' %>
+              <%= f.rich_text_area :content, class: 'form-control', required: true %>
+            </div>
+          </div>
+        </div>
+        <div class="card mt-3">
+          <div class="card-body">
+            <label class="form-label"><%= I18n.t('attributes.product.images') %></label>
+            <%= f.file_field :images, multiple: true, class: 'form-control' %>
+          </div>
+        </div>
+        <div class="card mt-3">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-6 col-12">
+                <%= f.label :price, I18n.t('attributes.product.price'), class: 'form-label' %>
+                <%= f.text_field :price, class: 'form-control currency', placeholder: 'R$ 0,00', required: true %>
+              </div>
+
+              <div class="col-md-6 col-12">
+                <%= f.label :comparation_price, I18n.t('attributes.product.comparation_price'), class: 'form-label' %>
+                <%= f.text_field :comparation_price, class: 'form-control currency', placeholder: 'R$ 0,00' %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card">
+          <div class="card-body">
+            <%= f.label :status, I18n.t('attributes.product.status'), class: 'form-label' %>
+            <%= f.select :status, Product::STATUS_VIEW, { }, { class: 'form-control form-select', include_blank: true } %>
+          </div>
+        </div>
+        <div class="card mt-3">
+          <div class="card-body">
+            <h5><%= I18n.t('views.product_organization') %></h5>
+            <div class="mb-3">
+              <%= f.label :category, I18n.t('attributes.product.category'), class: 'form-label' %>
+              <%= f.collection_select :category_id, Category.all, :id, :name, { prompt: 'Selecione uma categoria' }, { class: 'form-control form-select', include_blank: true } %>
+              <div class="form-text"><%= I18n.t('views.first_create_categories_in') %> <%= link_to I18n.t('views.new_category'), new_category_path %></div>
+            </div>
+            <div class="mb-3">
+              <%= f.label :tags, I18n.t('attributes.product.tags'), class: 'form-label' %>
+              <%= f.text_field :tags, class: 'form-control' %>
+              <div class="form-text"><%= I18n.t('views.tags_help') %></div>
+            </div>
+          </div>
+        </div>
+        <div class="card mt-3">
+          <div class="card-body">
+            <div class="d-flex justify-content-between">
+              <%= link_to I18n.t('views.discard'), products_path, class: 'btn btn-outline-dark' %>
+              <%= f.submit I18n.t('views.save'), class: "btn btn-success align-left" %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
