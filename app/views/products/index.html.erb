@@ -38,13 +38,31 @@
             <th class="image-column">
             </th>
             <th>
-              <%= I18n.t('views.product') %>
+              <% if params[:field] == 'title' && params[:order] == 'desc' %>
+                <%= link_to I18n.t('views.product'), products_path(field: 'title', order: 'asc'), class: 'text-reset text-decoration-none' %>
+              <% elsif params[:field] == 'title' && params[:order] == 'asc' %>
+                <%= link_to I18n.t('views.product'), products_path(field: 'title', order: 'desc'), class: 'text-reset text-decoration-none' %>
+              <% else %>
+                <%= link_to I18n.t('views.product'), products_path(field: 'title', order: 'asc'), class: 'text-reset text-decoration-none' %>
+              <% end %>
             </th>
             <th>
-              <%= I18n.t('views.status') %>
+              <% if params[:field] == 'status' && params[:order] == 'desc' %>
+                <%= link_to I18n.t('views.status'), products_path(field: 'status', order: 'asc'), class: 'text-reset text-decoration-none' %>
+              <% elsif params[:field] == 'status' && params[:order] == 'asc' %>
+                <%= link_to I18n.t('views.status'), products_path(field: 'status', order: 'desc'), class: 'text-reset text-decoration-none' %>
+              <% else %>
+                <%= link_to I18n.t('views.status'), products_path(field: 'status', order: 'asc'), class: 'text-reset text-decoration-none' %>
+              <% end %>
             </th>
             <th>
-              <%= I18n.t('views.category') %>
+              <% if params[:field] == 'category' && params[:order] == 'desc' %>
+                <%= link_to I18n.t('views.category'), products_path(field: 'category', order: 'asc'), class: 'text-reset text-decoration-none' %>
+              <% elsif params[:field] == 'category' && params[:order] == 'asc' %>
+                <%= link_to I18n.t('views.category'), products_path(field: 'category', order: 'desc'), class: 'text-reset text-decoration-none' %>
+              <% else %>
+                <%= link_to I18n.t('views.category'), products_path(field: 'category', order: 'asc'), class: 'text-reset text-decoration-none' %>
+              <% end %>
             </th>
           </tr>
         </thead>

@@ -4,21 +4,23 @@ require 'rails_helper'
 
 RSpec.describe ProductsController, type: :controller do
   describe 'GET #index' do
-    let(:product) { create(:product) }
+    context 'simple tests' do
+      let!(:product) { create(:product) }
 
-    it 'returns a successful response' do
-      get :index
-      expect(response).to be_successful
-    end
+      it 'returns a successful response' do
+        get :index
+        expect(response).to be_successful
+      end
 
-    it 'renders the index template' do
-      get :index
-      expect(response).to render_template('index')
-    end
+      it 'renders the index template' do
+        get :index
+        expect(response).to render_template('index')
+      end
 
-    it 'assigns @products' do
-      get :index
-      expect(assigns(:products)).to eq(Product.all)
+      it 'assigns @products' do
+        get :index
+        expect(assigns(:products)).to eq(Product.all.order(:created_at))
+      end
     end
 
     context 'filter by status' do
@@ -27,12 +29,12 @@ RSpec.describe ProductsController, type: :controller do
 
       it 'list only draft' do
         get :index, params: { status: 'draft' }
-        expect(assigns(:products)).to eq(Product.status('draft'))
+        expect(assigns(:products)).to eq(Product.status('draft').order(:created_at))
       end
 
       it 'list only active' do
         get :index, params: { status: 'active' }
-        expect(assigns(:products)).to eq(Product.status('active'))
+        expect(assigns(:products)).to eq(Product.status('active').order(:created_at))
       end
     end
 
@@ -44,6 +46,43 @@ RSpec.describe ProductsController, type: :controller do
       it do
         get :index, params: { search: 'mundo' }
         expect(assigns(:products)).to eq([product1, product2])
+      end
+    end
+
+    context 'order by column' do
+      let!(:category1) { create(:category, name: 'Aviação') }
+      let!(:category2) { create(:category, name: 'Barcos') }
+      let!(:product1) { create(:product, title: 'Adimirável Mundo Novo', status: 'draft', category: category1) }
+      let!(:product2) { create(:product, title: 'Mundo da Lua', status: 'active', category: category2) }
+
+      it 'order by title asc' do
+        get :index, params: { field: 'title', order: 'asc' }
+        expect(assigns(:products).first).to eq(product1)
+      end
+
+      it 'order by title desc' do
+        get :index, params: { field: 'title', order: 'desc' }
+        expect(assigns(:products).first).to eq(product2)
+      end
+
+      it 'order by status asc' do
+        get :index, params: { field: 'status', order: 'asc' }
+        expect(assigns(:products).first).to eq(product2)
+      end
+
+      it 'order by status desc' do
+        get :index, params: { field: 'status', order: 'desc' }
+        expect(assigns(:products).first).to eq(product1)
+      end
+
+      it 'order by category asc' do
+        get :index, params: { field: 'category', order: 'asc' }
+        expect(assigns(:products).first).to eq(product1)
+      end
+
+      it 'order by category desc' do
+        get :index, params: { field: 'category', order: 'desc' }
+        expect(assigns(:products).first).to eq(product2)
       end
     end
   end

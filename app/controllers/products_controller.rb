@@ -2,17 +2,10 @@
 
 class ProductsController < ApplicationController
   def index
-    @products = if params[:status].present?
-                  Product.status(params[:status])
-                else
-                  Product.all
-                end
-
-    @products = if params[:search].present?
-                  Product.by_title(params[:search])
-                else
-                  @products
-                end
+    @products = Product.all
+    @products = filter_by_status
+    @products = filter_by_title
+    @products = order_products
   end
 
   def new
@@ -69,5 +62,25 @@ class ProductsController < ApplicationController
     raise I18n.t('products.flash.actions.create.danger.price') if params[:product][:price].blank?
     raise I18n.t('products.flash.actions.create.danger.category') if permitted_params[:category_id].blank?
     raise I18n.t('products.flash.actions.create.danger.comparation_price') if validate_comparation_price
+  end
+
+  def filter_by_status
+    return @products.status(params[:status]) if params[:status].present?
+
+    @products
+  end
+
+  def filter_by_title
+    return @products.by_title(params[:search]) if params[:search].present?
+
+    @products
+  end
+
+  def order_products
+    return @products.order(:created_at) if params[:field].blank?
+
+    return @products.order(params[:field] => params[:order]) if params[:field] == 'title' || params[:field] == 'status'
+
+    @products.includes(:category).order("categories.name #{params[:order]}")
   end
 end

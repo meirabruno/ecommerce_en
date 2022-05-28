@@ -11,6 +11,6 @@ class Product < ApplicationRecord
   validates :title, :price, :status, presence: true
   validates :status, inclusion: { in: STATUS }
 
-  scope :status, ->(status) { where status: status }
-  scope :by_title, -> (search_term) { where("title ILIKE ?", "%#{search_term.downcase}%") }
+  scope :status, ->(status_search) { where(status: status_search) }
+  scope :by_title, ->(search_term) { where('title ILIKE ?', "%#{search_term.downcase}%") }
 end
