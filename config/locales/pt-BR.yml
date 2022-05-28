@@ -16,6 +16,7 @@ pt-BR:
     tags_help: 'Para adicionar mais de uma tag separe elas por vírgula. Ex.: Ficção Científica, Cyberpunk'
     discard: 'Descartar'
     save: 'Salvar'
+    search: 'Buscar'
   attributes:
     product:
       title: 'Título'

@@ -7,6 +7,12 @@ class ProductsController < ApplicationController
                 else
                   Product.all
                 end
+
+    @products = if params[:search].present?
+                  Product.by_title(params[:search])
+                else
+                  @products
+                end
   end
 
   def new

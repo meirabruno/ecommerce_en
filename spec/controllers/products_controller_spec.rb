@@ -35,6 +35,17 @@ RSpec.describe ProductsController, type: :controller do
         expect(assigns(:products)).to eq(Product.status('active'))
       end
     end
+
+    context 'search by title' do
+      let!(:product1) { create(:product, title: 'Adimirável Mundo Novo') }
+      let!(:product2) { create(:product, title: 'Mundo da Lua') }
+      let!(:product3) { create(:product, title: 'O Andarilho') }
+
+      it do
+        get :index, params: { search: 'mundo' }
+        expect(assigns(:products)).to eq([product1, product2])
+      end
+    end
   end
 
   describe 'GET #new' do
