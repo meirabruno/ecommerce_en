@@ -10,4 +10,6 @@ class Product < ApplicationRecord
 
   validates :title, :price, :status, presence: true
   validates :status, inclusion: { in: STATUS }
+
+  scope :status, ->(status) { where status: status }
 end

@@ -16,9 +16,24 @@ RSpec.describe ProductsController, type: :controller do
       expect(response).to render_template('index')
     end
 
-    it 'assigns @users' do
+    it 'assigns @products' do
       get :index
       expect(assigns(:products)).to eq(Product.all)
+    end
+
+    context 'filter by status' do
+      let!(:product_draft) { create(:product, status: 'draft') }
+      let!(:product_active) { create(:product, status: 'active') }
+
+      it 'list only draft' do
+        get :index, params: { status: 'draft' }
+        expect(assigns(:products)).to eq(Product.status('draft'))
+      end
+
+      it 'list only active' do
+        get :index, params: { status: 'active' }
+        expect(assigns(:products)).to eq(Product.status('active'))
+      end
     end
   end
 

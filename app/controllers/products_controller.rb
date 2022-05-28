@@ -2,7 +2,11 @@
 
 class ProductsController < ApplicationController
   def index
-    @products = Product.all
+    @products = if params[:status].present?
+                  Product.status(params[:status])
+                else
+                  Product.all
+                end
   end
 
   def new

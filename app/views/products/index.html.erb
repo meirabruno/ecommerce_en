@@ -6,49 +6,56 @@
 </div>
 
 <div class="card">
-  <div class="card-header">
-    <ul class="nav">
+  <div class="card-body">
+    <ul class="nav nav-tabs">
       <li class="nav-item">
-        <%= link_to I18n.t('views.all'), products_path, class: 'nav-link active' %>
+        <%= link_to I18n.t('views.all'), products_path, class: "nav-link #{tab_all_class(params[:status])}", "aria-current": "page" %>
       </li>
       <li class="nav-item">
-        <%= link_to I18n.t('views.active'), products_path, class: 'nav-link' %>
+        <%= link_to I18n.t('views.active'), products_path(status: 'active'), class: "nav-link #{tab_active_class(params[:status])}", "aria-current": "page" %>
       </li>
       <li class="nav-item">
-        <%= link_to I18n.t('views.draft'), products_path, class: 'nav-link' %>
+        <%= link_to I18n.t('views.draft'), products_path(status: 'draft'), class: "nav-link #{tab_draft_class(params[:status])}", "aria-current": "page" %>
       </li>
     </ul>
-  </div>
-  <div class="card-body">
-    <table class="table">
-      <thead>
-        <tr>
-          <th>
-          </th>
-          <th>
-          </th>
-          <th>
-            <%= I18n.t('views.product') %>
-          </th>
-          <th>
-            <%= I18n.t('views.status') %>
-          </th>
-          <th>
-            <%= I18n.t('views.category') %>
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @products.each do |product| %>
+    <div class="table-responsive">
+      <table class="table align-middle">
+        <thead>
           <tr>
-            <td></td>
-            <td></td>
-            <td><%= product.title %></td>
-            <td><%= product.status %></td>
-            <td><%= product.category.name %></td>
+            <th class="checkbox-column">
+              <input class="form-check-input" type="checkbox" id="check-product-all">
+            </th>
+            <th class="image-column">
+            </th>
+            <th>
+              <%= I18n.t('views.product') %>
+            </th>
+            <th>
+              <%= I18n.t('views.status') %>
+            </th>
+            <th>
+              <%= I18n.t('views.category') %>
+            </th>
           </tr>
-        <% end %>
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          <% @products.each do |product| %>
+            <tr>
+              <td class="checkbox-column"><input class="form-check-input" type="checkbox" id="check-product<%= product.id %>"></td>
+              <td class="image-column">
+                <% if product.images.present? %>
+                  <%= image_tag rails_storage_proxy_path(product.images.first), class: 'img-thumbnail img-fluid image-list' %>
+                <% else %>
+                  <%= image_tag 'no-image.png', class: 'img-thumbnail img-fluid image-list' %>
+                <% end %>
+              </td>
+              <td><%= product.title %></td>
+              <td><span class="<%= status_class(product.status) %>"><%= product_status(product.status) %></span></td>
+              <td><%= product.category.name %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>
