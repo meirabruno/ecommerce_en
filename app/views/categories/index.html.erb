@@ -1,0 +1,27 @@
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+  <h2><%= I18n.t('views.category') %></h2>
+  <div class="btn-toolbar mb-2 mb-md-0">
+    <%= link_to I18n.t('views.new_category'), new_category_path, class: 'btn btn-primary' %>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-body">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>
+            <%= I18n.t('attributes.categories.name') %>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @categories.each do |category| %>
+          <tr>
+            <td><%= category.name %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

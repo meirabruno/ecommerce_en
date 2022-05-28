@@ -7,7 +7,8 @@ pt-BR:
     draft: 'Rascunho'
     product: 'Produto'
     status: 'Status'
-    category: 'Categorias'
+    category: 'Categoria'
+    categories: 'Categorias'
     new_category: 'Adicionar Categoria'
     return: 'Voltar'
     product_organization: 'Organização de Produtos'
@@ -25,6 +26,8 @@ pt-BR:
       images: 'Mídias'
       price: 'Preço'
       comparation_price: 'Comparação de Preços'
+    categories:
+      name: 'Nome'
   products:
     flash:
       actions:
@@ -37,3 +40,10 @@ pt-BR:
             price: 'Preço é obrigatório'
             category: 'Categoria é obrigatória'
             comparation_price: 'Preço de comparação deve ser menor que Preço'
+  categories:
+    flash:
+      actions:
+        create:
+          notice: 'Categoria criada com sucesso'
+          danger:
+            name: 'Nome é obrigatório'
