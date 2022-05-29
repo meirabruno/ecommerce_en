@@ -64,6 +64,7 @@
                 <%= link_to I18n.t('views.category'), products_path(field: 'category', order: 'asc'), class: 'text-reset text-decoration-none' %>
               <% end %>
             </th>
+            <th><%= I18n.t('views.actions') %></th>
           </tr>
         </thead>
         <tbody>
@@ -80,6 +81,7 @@
               <td><%= product.title %></td>
               <td><span class="<%= status_class(product.status) %>"><%= product_status(product.status) %></span></td>
               <td><%= product.category.name %></td>
+              <td><%= link_to I18n.t('views.edit'), edit_product_path(product), class: 'btn btn-secondary' %></td>
             </tr>
           <% end %>
         </tbody>

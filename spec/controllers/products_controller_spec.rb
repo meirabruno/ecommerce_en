@@ -210,4 +210,130 @@ RSpec.describe ProductsController, type: :controller do
       end
     end
   end
+
+  describe 'GET #edit' do
+    let!(:product) { create(:product) }
+
+    it 'returns a successful response' do
+      get :edit, params: { id: product.id }
+      expect(response).to be_successful
+    end
+
+    it 'renders the edit template' do
+      get :edit, params: { id: product.id }
+      expect(response).to render_template('edit')
+    end
+
+    it 'assigns edit product' do
+      get :edit, params: { id: product.id }
+      expect(assigns(:product)).to eq(product)
+    end
+  end
+
+  describe 'PATCH #update' do
+    let(:category) { create(:category) }
+    let!(:product) { create(:product, title: 'Primeiro Title') }
+
+    context 'successful' do
+      it 'update a product' do
+        patch :update, params: { id: product.id, product: { title: 'Outro Title',
+                                                            content: Faker::Lorem.paragraph,
+                                                            status: 'draft',
+                                                            price: 3_000,
+                                                            comparation_price: 2_990,
+                                                            category_id: category.id } }
+
+        product.reload
+        expect(product.title).to eq('Outro Title')
+      end
+
+      it 'redirect to index and show flash message' do
+        patch :update, params: { id: product.id, product: { title: 'Outro Title',
+                                                            content: Faker::Lorem.paragraph,
+                                                            status: 'draft',
+                                                            price: 3_000,
+                                                            comparation_price: 2_990,
+                                                            category_id: category.id } }
+
+        product.reload
+
+        expect(response).to redirect_to(action: :index)
+        expect(flash[:success]).to eq(I18n.t('products.flash.actions.update.notice'))
+      end
+    end
+
+    context 'unsuccessful' do
+      it 'whitout title' do
+        patch :update, params: { id: product.id, product: { title: nil,
+                                                            content: Faker::Lorem.paragraph,
+                                                            price: 3_000,
+                                                            comparation_price: 2_990,
+                                                            status: 'draft',
+                                                            category_id: category.id } }
+
+        expect(response).to render_template(:edit)
+        expect(flash[:danger]).to eq(I18n.t('products.flash.actions.create.danger.title'))
+      end
+
+      it 'whitout content' do
+        patch :update, params: { id: product.id, product: { title: Faker::Book.title,
+                                                            content: nil,
+                                                            price: 3_000,
+                                                            comparation_price: 2_990,
+                                                            status: 'draft',
+                                                            category_id: category.id } }
+
+        expect(response).to render_template(:edit)
+        expect(flash[:danger]).to eq(I18n.t('products.flash.actions.create.danger.description'))
+      end
+
+      it 'whitout price' do
+        patch :update, params: { id: product.id, product: { title: Faker::Book.title,
+                                                            content: Faker::Lorem.paragraph,
+                                                            price: nil,
+                                                            comparation_price: 2_990,
+                                                            status: 'draft',
+                                                            category_id: category.id } }
+
+        expect(response).to render_template(:edit)
+        expect(flash[:danger]).to eq(I18n.t('products.flash.actions.create.danger.price'))
+      end
+
+      it 'when comparation_price is higher than price' do
+        patch :update, params: { id: product.id, product: { title: Faker::Book.title,
+                                                            content: Faker::Lorem.paragraph,
+                                                            price: 3_000,
+                                                            comparation_price: 4_990,
+                                                            status: 'draft',
+                                                            category_id: category.id } }
+
+        expect(response).to render_template(:edit)
+        expect(flash[:danger]).to eq(I18n.t('products.flash.actions.create.danger.comparation_price'))
+      end
+
+      it 'whitout status' do
+        patch :update, params: { id: product.id, product: { title: Faker::Book.title,
+                                                            content: Faker::Lorem.paragraph,
+                                                            price: 3_000,
+                                                            comparation_price: 2_990,
+                                                            status: nil,
+                                                            category_id: category.id } }
+
+        expect(response).to render_template(:edit)
+        expect(flash[:danger]).to eq(I18n.t('products.flash.actions.create.danger.status'))
+      end
+
+      it 'whitout category_id' do
+        patch :update, params: { id: product.id, product: { title: Faker::Book.title,
+                                                            content: Faker::Lorem.paragraph,
+                                                            price: 3_000,
+                                                            comparation_price: 2_990,
+                                                            status: 'draft',
+                                                            category_id: nil } }
+
+        expect(response).to render_template(:edit)
+        expect(flash[:danger]).to eq(I18n.t('products.flash.actions.create.danger.category'))
+      end
+    end
+  end
 end

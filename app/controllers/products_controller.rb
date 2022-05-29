@@ -29,6 +29,28 @@ class ProductsController < ApplicationController
     render :new
   end
 
+  def edit
+    @product = Product.find(params[:id])
+  end
+
+  def update
+    @product = Product.find(params[:id])
+    @product.update(permitted_params)
+    @product.price = process_price
+    @product.comparation_price = process_comparation_price
+    @product.tags = process_tags
+
+    validate_params
+
+    @product.save!
+
+    flash[:success] = I18n.t('products.flash.actions.update.notice')
+    redirect_to action: :index
+  rescue StandardError => e
+    flash[:danger] = e.message
+    render :edit
+  end
+
   private
 
   def permitted_params
@@ -36,13 +58,13 @@ class ProductsController < ApplicationController
   end
 
   def process_price
-    params[:product][:price].delete(',')
+    params[:product][:price].delete(',').delete('.') rescue nil
   end
 
   def process_comparation_price
     return nil if params[:product][:comparation_price].nil? || params[:product][:comparation_price].to_i.zero?
 
-    params[:product][:comparation_price].delete(',')
+    params[:product][:comparation_price].delete(',').delete('.') rescue nil
   end
 
   def process_tags

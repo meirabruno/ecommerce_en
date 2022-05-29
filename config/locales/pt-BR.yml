@@ -17,6 +17,8 @@ pt-BR:
     discard: 'Descartar'
     save: 'Salvar'
     search: 'Buscar'
+    actions: 'Ações'
+    edit: 'Editar'
   attributes:
     product:
       title: 'Título'
@@ -41,6 +43,8 @@ pt-BR:
             price: 'Preço é obrigatório'
             category: 'Categoria é obrigatória'
             comparation_price: 'Preço de comparação deve ser menor que Preço'
+        update:
+          notice: 'Produto atualizado com sucesso'
   categories:
     flash:
       actions:
