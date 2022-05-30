@@ -2,6 +2,7 @@
 //= require popper
 //= require bootstrap-sprockets
 //= require jquery.mask.min.js
+//= require products
 
 import "trix"
 import "@rails/actiontext"

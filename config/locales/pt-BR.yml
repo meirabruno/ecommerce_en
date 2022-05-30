@@ -19,6 +19,7 @@ pt-BR:
     search: 'Buscar'
     actions: 'Ações'
     edit: 'Editar'
+    remove_products: 'Excluir produto(s)'
   attributes:
     product:
       title: 'Título'

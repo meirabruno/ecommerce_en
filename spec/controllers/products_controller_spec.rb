@@ -336,4 +336,32 @@ RSpec.describe ProductsController, type: :controller do
       end
     end
   end
+
+  describe 'DELETE #remove_products' do
+    let!(:product1) { create(:product) }
+    let!(:product2) { create(:product) }
+    let!(:product3) { create(:product) }
+
+    context 'successful' do
+      it 'remove one product' do
+        delete :remove_products, params: { ids: [product1.id] }
+
+        expect(Product.all.ids).to match_array([product2.id, product3.id])
+      end
+
+      it 'remove many products' do
+        delete :remove_products, params: { ids: [product1.id, product2.id] }
+
+        expect(Product.all.ids).to match_array([product3.id])
+      end
+    end
+
+    context 'unsuccessful' do
+      it 'when not send ids' do
+        delete :remove_products, params: { ids: [] }
+
+        expect(Product.all.ids).to match_array([product1.id, product2.id, product3.id])
+      end
+    end
+  end
 end

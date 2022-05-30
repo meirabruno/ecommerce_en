@@ -51,6 +51,13 @@ class ProductsController < ApplicationController
     render :edit
   end
 
+  def remove_products
+    return if params[:ids].blank?
+
+    products = Product.find(params[:ids])
+    products.map(&:destroy)
+  end
+
   private
 
   def permitted_params

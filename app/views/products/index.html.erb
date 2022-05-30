@@ -5,87 +5,104 @@
   </div>
 </div>
 
-<div class="card">
+<div class="card" id="products-container">
   <div class="card-body">
-    <%= form_with url: products_path, method: :get do |f| %>
-      <div class="row mb-3">
-        <div class="col-11">
-          <%= f.text_field :search, class: 'form-control', placeholder: 'Buscar Produtos' %>
-        </div>
-        <div class="col-1">
-          <%= f.submit I18n.t('views.search'), class: "btn btn-primary align-left" %>
+    <div class="row">
+      <div class="col-12">
+        <%= form_with url: products_path, method: :get do |f| %>
+          <div class="row mb-3">
+            <div class="col-11">
+              <%= f.text_field :search, class: 'form-control', placeholder: 'Buscar Produtos' %>
+            </div>
+            <div class="col-1">
+              <%= f.submit I18n.t('views.search'), class: "btn btn-primary align-left" %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="row mb-3 js-remove-products-button d-none">
+      <div class="col-12">
+        <ul class="list-group list-group-horizontal">
+          <li class="list-group-item"><span id="js-count-selected">0</span> selecionados</li>
+          <li class="list-group-item"><span class="js-remove-products remove-products"><%= I18n.t('views.remove_products') %></span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <ul class="nav nav-tabs">
+          <li class="nav-item">
+            <%= link_to I18n.t('views.all'), products_path, class: "nav-link #{tab_all_class(params[:status])}", "aria-current": "page" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to I18n.t('views.active'), products_path(status: 'active'), class: "nav-link #{tab_active_class(params[:status])}", "aria-current": "page" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to I18n.t('views.draft'), products_path(status: 'draft'), class: "nav-link #{tab_draft_class(params[:status])}", "aria-current": "page" %>
+          </li>
+        </ul>
+        <div class="table-responsive">
+          <table class="table align-middle">
+            <thead>
+              <tr>
+                <th class="checkbox-column">
+                  <input class="form-check-input js-check-all-product" type="checkbox" id="check-product-all">
+                </th>
+                <th class="image-column">
+                </th>
+                <th>
+                  <% if params[:field] == 'title' && params[:order] == 'desc' %>
+                    <%= link_to I18n.t('views.product'), products_path(field: 'title', order: 'asc'), class: 'text-reset text-decoration-none' %>
+                  <% elsif params[:field] == 'title' && params[:order] == 'asc' %>
+                    <%= link_to I18n.t('views.product'), products_path(field: 'title', order: 'desc'), class: 'text-reset text-decoration-none' %>
+                  <% else %>
+                    <%= link_to I18n.t('views.product'), products_path(field: 'title', order: 'asc'), class: 'text-reset text-decoration-none' %>
+                  <% end %>
+                </th>
+                <th>
+                  <% if params[:field] == 'status' && params[:order] == 'desc' %>
+                    <%= link_to I18n.t('views.status'), products_path(field: 'status', order: 'asc'), class: 'text-reset text-decoration-none' %>
+                  <% elsif params[:field] == 'status' && params[:order] == 'asc' %>
+                    <%= link_to I18n.t('views.status'), products_path(field: 'status', order: 'desc'), class: 'text-reset text-decoration-none' %>
+                  <% else %>
+                    <%= link_to I18n.t('views.status'), products_path(field: 'status', order: 'asc'), class: 'text-reset text-decoration-none' %>
+                  <% end %>
+                </th>
+                <th>
+                  <% if params[:field] == 'category' && params[:order] == 'desc' %>
+                    <%= link_to I18n.t('views.category'), products_path(field: 'category', order: 'asc'), class: 'text-reset text-decoration-none' %>
+                  <% elsif params[:field] == 'category' && params[:order] == 'asc' %>
+                    <%= link_to I18n.t('views.category'), products_path(field: 'category', order: 'desc'), class: 'text-reset text-decoration-none' %>
+                  <% else %>
+                    <%= link_to I18n.t('views.category'), products_path(field: 'category', order: 'asc'), class: 'text-reset text-decoration-none' %>
+                  <% end %>
+                </th>
+                <th><%= I18n.t('views.actions') %></th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @products.each do |product| %>
+                <tr id="product-<%= product.id %>">
+                  <td class="checkbox-column"><input class="form-check-input js-check-product" type="checkbox" data-product-id="<%= product.id %>" id="check-product-<%= product.id %>"></td>
+                  <td class="image-column">
+                    <% if product.images.present? %>
+                      <%= image_tag rails_storage_proxy_path(product.images.first), class: 'img-thumbnail img-fluid image-list' %>
+                    <% else %>
+                      <%= image_tag 'no-image.png', class: 'img-thumbnail img-fluid image-list' %>
+                    <% end %>
+                  </td>
+                  <td><%= product.title %></td>
+                  <td><span class="<%= status_class(product.status) %>"><%= product_status(product.status) %></span></td>
+                  <td><%= product.category.name %></td>
+                  <td><%= link_to I18n.t('views.edit'), edit_product_path(product), class: 'btn btn-secondary' %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
         </div>
       </div>
-    <% end %>
-    <ul class="nav nav-tabs">
-      <li class="nav-item">
-        <%= link_to I18n.t('views.all'), products_path, class: "nav-link #{tab_all_class(params[:status])}", "aria-current": "page" %>
-      </li>
-      <li class="nav-item">
-        <%= link_to I18n.t('views.active'), products_path(status: 'active'), class: "nav-link #{tab_active_class(params[:status])}", "aria-current": "page" %>
-      </li>
-      <li class="nav-item">
-        <%= link_to I18n.t('views.draft'), products_path(status: 'draft'), class: "nav-link #{tab_draft_class(params[:status])}", "aria-current": "page" %>
-      </li>
-    </ul>
-    <div class="table-responsive">
-      <table class="table align-middle">
-        <thead>
-          <tr>
-            <th class="checkbox-column">
-              <input class="form-check-input" type="checkbox" id="check-product-all">
-            </th>
-            <th class="image-column">
-            </th>
-            <th>
-              <% if params[:field] == 'title' && params[:order] == 'desc' %>
-                <%= link_to I18n.t('views.product'), products_path(field: 'title', order: 'asc'), class: 'text-reset text-decoration-none' %>
-              <% elsif params[:field] == 'title' && params[:order] == 'asc' %>
-                <%= link_to I18n.t('views.product'), products_path(field: 'title', order: 'desc'), class: 'text-reset text-decoration-none' %>
-              <% else %>
-                <%= link_to I18n.t('views.product'), products_path(field: 'title', order: 'asc'), class: 'text-reset text-decoration-none' %>
-              <% end %>
-            </th>
-            <th>
-              <% if params[:field] == 'status' && params[:order] == 'desc' %>
-                <%= link_to I18n.t('views.status'), products_path(field: 'status', order: 'asc'), class: 'text-reset text-decoration-none' %>
-              <% elsif params[:field] == 'status' && params[:order] == 'asc' %>
-                <%= link_to I18n.t('views.status'), products_path(field: 'status', order: 'desc'), class: 'text-reset text-decoration-none' %>
-              <% else %>
-                <%= link_to I18n.t('views.status'), products_path(field: 'status', order: 'asc'), class: 'text-reset text-decoration-none' %>
-              <% end %>
-            </th>
-            <th>
-              <% if params[:field] == 'category' && params[:order] == 'desc' %>
-                <%= link_to I18n.t('views.category'), products_path(field: 'category', order: 'asc'), class: 'text-reset text-decoration-none' %>
-              <% elsif params[:field] == 'category' && params[:order] == 'asc' %>
-                <%= link_to I18n.t('views.category'), products_path(field: 'category', order: 'desc'), class: 'text-reset text-decoration-none' %>
-              <% else %>
-                <%= link_to I18n.t('views.category'), products_path(field: 'category', order: 'asc'), class: 'text-reset text-decoration-none' %>
-              <% end %>
-            </th>
-            <th><%= I18n.t('views.actions') %></th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @products.each do |product| %>
-            <tr>
-              <td class="checkbox-column"><input class="form-check-input" type="checkbox" id="check-product<%= product.id %>"></td>
-              <td class="image-column">
-                <% if product.images.present? %>
-                  <%= image_tag rails_storage_proxy_path(product.images.first), class: 'img-thumbnail img-fluid image-list' %>
-                <% else %>
-                  <%= image_tag 'no-image.png', class: 'img-thumbnail img-fluid image-list' %>
-                <% end %>
-              </td>
-              <td><%= product.title %></td>
-              <td><span class="<%= status_class(product.status) %>"><%= product_status(product.status) %></span></td>
-              <td><%= product.category.name %></td>
-              <td><%= link_to I18n.t('views.edit'), edit_product_path(product), class: 'btn btn-secondary' %></td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
     </div>
   </div>
 </div>
