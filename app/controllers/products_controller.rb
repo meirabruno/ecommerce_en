@@ -34,7 +34,7 @@ class ProductsController < ApplicationController
   end
 
   def update
-    @product = Product.find(params[:id])
+    @product = Product.friendly.find(params[:id])
     @product.update(permitted_params)
     @product.price = process_price
     @product.comparation_price = process_comparation_price
