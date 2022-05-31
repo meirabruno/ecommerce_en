@@ -58,6 +58,10 @@ class ProductsController < ApplicationController
     products.map(&:destroy)
   end
 
+  def show
+    @product = Product.find(params[:id])
+  end
+
   private
 
   def permitted_params

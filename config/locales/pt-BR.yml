@@ -1,5 +1,6 @@
 pt-BR:
   views:
+    home: 'Home'
     products: 'Produtos'
     new_product: 'Adicionar Produto'
     all: 'Todos'
@@ -17,9 +18,11 @@ pt-BR:
     discard: 'Descartar'
     save: 'Salvar'
     search: 'Buscar'
+    search_products: 'Buscar Produtos'
     actions: 'Ações'
     edit: 'Editar'
     remove_products: 'Excluir produto(s)'
+    show: 'Ver produto'
   attributes:
     product:
       title: 'Título'
@@ -53,3 +56,13 @@ pt-BR:
           notice: 'Categoria criada com sucesso'
           danger:
             name: 'Nome é obrigatório'
+  number:
+    currency:
+      format:
+        delimiter: "."
+        format: "%u %n"
+        precision: 2
+        separator: ","
+        significant: false
+        strip_insignificant_zeros: false
+        unit: R$

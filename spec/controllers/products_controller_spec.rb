@@ -364,4 +364,23 @@ RSpec.describe ProductsController, type: :controller do
       end
     end
   end
+
+  describe 'GET #show' do
+    let!(:product) { create(:product) }
+
+    it 'returns a successful response' do
+      get :show, params: { id: product.id }
+      expect(response).to be_successful
+    end
+
+    it 'renders the show template' do
+      get :show, params: { id: product.id }
+      expect(response).to render_template('show')
+    end
+
+    it 'assigns show product' do
+      get :show, params: { id: product.id }
+      expect(assigns(:product)).to eq(product)
+    end
+  end
 end

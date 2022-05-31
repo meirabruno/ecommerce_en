@@ -30,4 +30,10 @@ module ApplicationHelper
   def tab_draft_class(status)
     'active' if status == 'draft'
   end
+
+  def old_price_class(product)
+    return 'text-success' if product.comparation_price.blank?
+
+    'text-secondary text-decoration-line-through'
+  end
 end

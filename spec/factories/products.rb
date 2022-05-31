@@ -7,6 +7,7 @@ FactoryBot.define do
     tags { %w[livro literatura cultura] }
     price { 3_000 }
     comparation_price { 2_490 }
+    content { 'Descrição do produto' }
     category
   end
 end

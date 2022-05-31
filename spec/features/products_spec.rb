@@ -60,4 +60,32 @@ describe 'Products' do
       expect(page).to_not have_content(product3.category.name)
     end
   end
+
+  context 'display only active produts in home' do
+    let!(:product_draft) { create(:product, status: 'draft', title: 'Novembro de 63') }
+    let!(:product_active) { create(:product, status: 'active', title: 'O silêncio dos inocentes') }
+
+    it do
+      visit root_path
+
+      expect(page).to have_content(product_active.title)
+
+      expect(page).to_not have_content(product_draft.title)
+    end
+  end
+
+  context 'show product' do
+    let!(:product) { create(:product, status: 'active') }
+
+    it do
+      visit product_path(product)
+
+      expect(page).to have_content(product.title)
+      expect(page).to have_content(product.category.name)
+      expect(page).to have_content(product.tags.join(','))
+      expect(page).to have_content('Descrição do produto')
+      expect(page).to have_content('R$ 30,00')
+      expect(page).to have_content('R$ 24,90')
+    end
+  end
 end

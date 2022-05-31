@@ -1,0 +1,32 @@
+<div class="container">
+  <div class="row mt-2">
+    <% @products.each do |product| %>
+      <div class="col-6">
+        <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+          <div class="col p-4 d-flex flex-column position-static">
+            <strong class="d-inline-block mb-2 text-primary"><%= product.category.name %></strong>
+            <h3 class="mb-0"><%= product.title %></h3>
+            <div class="row mb-1">
+              <div class="col-6">
+                <div class="mb-1 <%= old_price_class(product) %>"><%= number_to_currency(product.price/100.0) %></div>
+              </div>
+              <div class="col-6">
+                <% if product.comparation_price %>
+                  <div class="mb-1 text-success"><%= number_to_currency(product.comparation_price/100.0) %></div>
+                <% end %>
+              </div>
+            </div>
+            <%= link_to I18n.t('views.show'), product_path(product), class: 'stretched-link' %>
+          </div>
+          <div class="col-auto d-none d-lg-block">
+            <% if product.images.present? %>
+              <%= image_tag rails_storage_proxy_path(product.images.first), class: 'img-fluid product-image' %>
+            <% else %>
+              <%= image_tag 'no-image.png', class: 'img-fluid product-image' %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

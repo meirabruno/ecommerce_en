@@ -15,8 +15,10 @@
       </div>
       <div class="card mt-3">
         <div class="card-body">
-          <label class="form-label"><%= I18n.t('attributes.product.images') %></label>
-          <%= f.file_field :images, multiple: true, class: 'form-control' %>
+          <div class="mb-3">
+            <label class="form-label"><%= I18n.t('attributes.product.images') %></label>
+            <%= f.file_field :images, multiple: true, class: 'form-control' %>
+          </div>
         </div>
       </div>
       <div class="card mt-3">

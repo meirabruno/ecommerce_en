@@ -1,0 +1,50 @@
+<div class="container">
+  <div class="row mt-3">
+    <div class="col-md-12">
+      <section class="card">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-6">
+              <div class="row">
+                <div class="col-12">
+                  <% if @product.images.present? %>
+                    <%= image_tag rails_storage_proxy_path(@product.images.first), class: 'img-fluid rounded' %>
+                  <% else %>
+                    <%= image_tag 'no-image.png', class: 'img-fluid product-image' %>
+                  <% end %>
+                </div>
+                <% if @product.images.count > 1 %>
+                  <div class="row mt-1">
+                    <% @product.images.limit(4).offset(1).each do |image| %>
+                      <div class="col-3 p-2">
+                        <%= image_tag rails_storage_proxy_path(image), class: 'img-fluid rounded ml-1' %>
+                      </div>
+                    <% end %>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+            <div class="col-6">
+              <h1>
+                <%= @product.title %>
+              </h1>
+              <div>
+                <span>
+                  <strong><%= @product.category.name %></strong>
+                </span>
+                <br>
+                <span>
+                  <strong><%= @product.tags.join(',') rescue nil %></strong>
+                </span>
+              </div>
+              <div class="mb-1 <%= old_price_class(@product) %>"><%= number_to_currency(@product.price/100.0) %></div>
+              <% if @product.comparation_price %>
+                <div class="mb-1 text-success"><%= number_to_currency(@product.comparation_price/100.0) %></div>
+              <% end %>
+              <%= @product.content %>
+            </div>
+          </div>
+        </section>
+      </div>
+  </div>
+</div>

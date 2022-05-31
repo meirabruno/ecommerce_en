@@ -12,7 +12,7 @@
         <%= form_with url: products_path, method: :get do |f| %>
           <div class="row mb-3">
             <div class="col-11">
-              <%= f.text_field :search, class: 'form-control', placeholder: 'Buscar Produtos' %>
+              <%= f.text_field :search, class: 'form-control', placeholder: I18n.t('views.search_products') %>
             </div>
             <div class="col-1">
               <%= f.submit I18n.t('views.search'), class: "btn btn-primary align-left" %>
