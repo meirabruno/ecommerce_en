@@ -8,6 +8,7 @@ ruby '3.1.0'
 gem 'aws-sdk-s3', require: false
 gem 'bootsnap', require: false
 gem 'bootstrap', '~> 5.1.3'
+gem 'friendly_id', '~> 5.4.0'
 gem 'image_processing'
 gem 'importmap-rails'
 gem 'jbuilder'

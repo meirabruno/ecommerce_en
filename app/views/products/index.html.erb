@@ -54,27 +54,27 @@
                 </th>
                 <th>
                   <% if params[:field] == 'title' && params[:order] == 'desc' %>
-                    <%= link_to I18n.t('views.product'), products_path(field: 'title', order: 'asc'), class: 'text-reset text-decoration-none' %>
+                    <%= link_to I18n.t('views.product'), products_path(field: 'title', order: 'asc'), class: 'text-reset text-decoration-none' %> <i class="fa-solid fa-arrow-up-a-z"></i>
                   <% elsif params[:field] == 'title' && params[:order] == 'asc' %>
-                    <%= link_to I18n.t('views.product'), products_path(field: 'title', order: 'desc'), class: 'text-reset text-decoration-none' %>
+                    <%= link_to I18n.t('views.product'), products_path(field: 'title', order: 'desc'), class: 'text-reset text-decoration-none' %> <i class="fa-solid fa-arrow-down-a-z"></i>
                   <% else %>
                     <%= link_to I18n.t('views.product'), products_path(field: 'title', order: 'asc'), class: 'text-reset text-decoration-none' %>
                   <% end %>
                 </th>
                 <th>
                   <% if params[:field] == 'status' && params[:order] == 'desc' %>
-                    <%= link_to I18n.t('views.status'), products_path(field: 'status', order: 'asc'), class: 'text-reset text-decoration-none' %>
+                    <%= link_to I18n.t('views.status'), products_path(field: 'status', order: 'asc'), class: 'text-reset text-decoration-none' %> <i class="fa-solid fa-arrow-up-a-z"></i>
                   <% elsif params[:field] == 'status' && params[:order] == 'asc' %>
-                    <%= link_to I18n.t('views.status'), products_path(field: 'status', order: 'desc'), class: 'text-reset text-decoration-none' %>
+                    <%= link_to I18n.t('views.status'), products_path(field: 'status', order: 'desc'), class: 'text-reset text-decoration-none' %> <i class="fa-solid fa-arrow-down-a-z"></i>
                   <% else %>
                     <%= link_to I18n.t('views.status'), products_path(field: 'status', order: 'asc'), class: 'text-reset text-decoration-none' %>
                   <% end %>
                 </th>
                 <th>
                   <% if params[:field] == 'category' && params[:order] == 'desc' %>
-                    <%= link_to I18n.t('views.category'), products_path(field: 'category', order: 'asc'), class: 'text-reset text-decoration-none' %>
+                    <%= link_to I18n.t('views.category'), products_path(field: 'category', order: 'asc'), class: 'text-reset text-decoration-none' %> <i class="fa-solid fa-arrow-up-a-z"></i>
                   <% elsif params[:field] == 'category' && params[:order] == 'asc' %>
-                    <%= link_to I18n.t('views.category'), products_path(field: 'category', order: 'desc'), class: 'text-reset text-decoration-none' %>
+                    <%= link_to I18n.t('views.category'), products_path(field: 'category', order: 'desc'), class: 'text-reset text-decoration-none' %> <i class="fa-solid fa-arrow-down-a-z"></i>
                   <% else %>
                     <%= link_to I18n.t('views.category'), products_path(field: 'category', order: 'asc'), class: 'text-reset text-decoration-none' %>
                   <% end %>

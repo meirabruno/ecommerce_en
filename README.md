@@ -50,19 +50,34 @@ Sobre as imagens, Produtos podem ter N imagens como solicitado e também impleme
 
 ## Como utilizar o sistema
 
-#### Cadastro de Categorias
+#### Categorias
 
+Para que possa ser adicionado novos Produtos é necessário que pelo menos uma Categoria estaja cadastrada para que ela possa ser selecionada no cadastro de Produto.
 
+Para acessar a lista de Categorias basta clicar no menu superior Categorias, aqui vão estar listadas todas as categorias já cadastradas, para adicionar uma nova categoria basta clicer em Adicionar Categoria, você vai ser redirecionado para tela de criação, basta preencher o campo Nome e clicar em Salvar.
 
-#### Criação, visualização e envio de Invoices por email
+Após clicar em Salvar você vai ser redirecionado para a Lista de Categorias e vai ser possível visualizar a nova Categoria cadastrada.
 
-- Para criar uma nova Invoice basta estar logado e clicar no link Nova Invoice que fica acima da lista de Invoices;
-- Ao clicar você vai ser direcionado para tela de criação de uma nova invoice, preencha todos os campo e clique em Cadastrar, se todos os campos estiverem corretos a invoice vai ser criada e enviada para os emails adicionados no momento da criação e você vai ser redirecionado para a visualização dessa invoice;
-- Caso algum erro aconteça no momento da criação de uma invoice ele vai ser apresentado na tela e você vai precisar preencher todos os campos da invoice nomente para cadastra-la;
+#### Produtos
 
-- Uma vez criada a invoice você pode fazer o download dela clicando no link Donwload na tela de visualização da invoice ou baixando o anexo enviado por email;
-- Para acessar a tela de visualização de uma invoice não é necessário estar logado;
+Para visualizar a lista de Produtos cadastrados basta clicar em Produtos no menu superior, na lista vai ser possível visualizar todos os Produtos cadastrados.
 
-- Caso você seja o dono de uma invoice (foi você quem a criou) você pode enviar ela para mais emails além dos já enviados, basta acessar a visualizaçõo da invoice clicando em show na lista de invoices e um formulário vai ser apresentado no topo da tela, preencha o campo com os emails que deseja enviar e clique em Enviar, a invoice será enviada para esses novos emails e sua lista de emails será atualizada;
+Para cadastrar um novo Produto basta clicar em Adicionar Produto que você vai ser redirecionado para a tela de criação de Produtos. Para criar um novo Produto basta preencher os campos e clicar em Salvar.
+
+Se tudo estiver correto após clicar em salvar será redirecionado para a lista de Produtos e vai ser possível visualizar o novo Produto cadastrado com uma mensagem de sucesso, caso algum erro aconteça no cadastro você vai continuar na tela de criação de produtos e na parte superior vai ser apresentado uma mensagem com o erro encontrado.
+
+Uma vez na lista de Produtos é possível Buscar pelo nome do Produto, basta preencher o campo de busca e clicar em Buscar que a lista vai ser atualizada com os Produtos encontrados pela busca.
+
+Os Produtos estão por padrão ordenados pela data de criação, sendo os mais recentes no topo da lista, para reordenar os Produtos para uma melhor visualização, basta clicar no título da coluna desejada, lembrando que pode ser ordenado por Nome do Produto (coluna Produto), Por Status e por Categoria. Ao clicar uma vez para ordenar ele vai ordenar de A-Z (asc) e clicando mais uma vez de Z-A (desc).
+
+Outra ação possível é editar o Produto, basta clicar em Editar no produto que deseja altear e será redirecionado para a tela de edição de Produto, basta fazer as alterações desejadas e clicar em Salvar que será redirecionado para lista de Produtos em caso de sucesso e mantido na tela de edição caso algum erro ocorra e uma mensagem de erro vai ser apresentada.
+
+Na lista de produtos se você deseja excluir um ou mais produtos, basta selecionar o checkbox dos produtos que deseja remover, ou o checkbox no header da tabela para selecionar todos os Produtos. Uma vez selecionado pelo menos 1 Produto um contador e o botão de Excluir Produto(s) vai aparecer, clicando em Excluir Produto(s) todos os produtos selecionados vão ser excluidos.
+
+Também é possível visualizar apenas produtos Ativos ou em Rascunho, basta clicar nas abas Ativo para listar apenas os produtos Ativos e Rascunho para listar apenas os produtos em Rascunho.
+
+#### Home
+
+Ao acessar o sistema pela primeira vez você vai ir direto para tela Home, essa tela é uma simulação da visão publica da loja, onde os Produtos ativos são apresentados para o cliente, aqui são apresentados cards com as informações dos Produtos e ao clicar em um dos cards você será redirecionado para tela de Show do Produto, onde todas as informações cadastradas são apresentadas.
 
 
