@@ -34,20 +34,6 @@ config.active_storage.service = :amazon para config.active_storage.service = :lo
 
 Pronto já pode ser usado.
 
-## Comentários sobre a solução
-
-Implementei todas as funcionalidades desejadas e como bônus adicionei a visão publica da loja.
-
-Para a interface utilizei o Bootstrap por já conhecer sua estrutura e conseguir ser mais produtivo.
-
-Adicionei a Criação e Listagem de Categorias para que elas possam ser criadas e utilizadas na criação dos Produtos.
-
-Sobre a arquitetura, Categoria deixei como uma relação 1 para N com Produtos, onde o Produto tem uma Categoria e Categoria tem N Produtos.
-
-Para as tags decidi salvar como um array de strings, pois acredito que seria apenas um campo para ajudar no SEO da loja.
-
-Sobre as imagens, Produtos podem ter N imagens como solicitado e também implementei o deploy para o S3 da Amazon, basta preencher as variáveis de ambiente descritas em Como rodar
-
 ## Como utilizar o sistema
 
 #### Categorias
