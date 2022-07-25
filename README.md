@@ -1,4 +1,4 @@
-# HuskyCode - README
+# README
 
 EcommerceEn é a implementação de um CRUD de produtos de e-commerce, com informações básicas sobre produtos.
 
